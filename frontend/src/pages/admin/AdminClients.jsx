@@ -35,8 +35,9 @@ function AdminClients() {
       setDesignation("");
       setDescription("");
       setImage("");
+
       fetchClients();
-    } catch (err) {
+    } catch {
       setStatus("Failed to add client");
     }
   }
@@ -71,7 +72,7 @@ function AdminClients() {
 
         <input
           type="text"
-          placeholder="Image URL (https://...)"
+          placeholder="Image URL"
           value={image}
           onChange={(e) => setImage(e.target.value)}
           required

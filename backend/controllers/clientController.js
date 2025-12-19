@@ -28,7 +28,7 @@ export const addClient = async (req, res) => {
 export const getClients = async (req, res) => {
   try {
     const clients = await Client.find().sort({ createdAt: -1 });
-    res.json(clients);
+    res.status(200).json(clients);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch clients" });
   }
