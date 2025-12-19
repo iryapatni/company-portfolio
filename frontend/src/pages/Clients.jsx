@@ -45,7 +45,7 @@ function Clients() {
           <div className="project-card" key={client._id}>
             <div className="client-avatar">
                 <img
-                    src={`${BASE_URL}/${client.image}`}
+                    src={project.image}
                     alt={client.name}
                 />
                 </div>

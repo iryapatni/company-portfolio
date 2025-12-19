@@ -46,7 +46,7 @@ function Projects() {
           <div className="project-card" key={project._id}>
             <div className="project-image">
               <img
-                src={`${BASE_URL}/${project.image}`}
+                src={project.image}
                 alt={project.name}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
