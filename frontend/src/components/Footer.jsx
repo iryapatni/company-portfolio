@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="footer">
@@ -11,6 +13,16 @@ function Footer() {
           © {new Date().getFullYear()} Company. All rights reserved.
         </p>
       </div>
+
+      {import.meta.env.DEV && (
+        <div className="admin-links">
+          <h4>Admin Panel</h4>
+          <Link to="/admin/projects">Projects</Link>
+          <Link to="/admin/clients">Clients</Link>
+          <Link to="/admin/contacts">Contacts</Link>
+          <Link to="/admin/subscribers">Subscribers</Link>
+        </div>
+      )}
     </footer>
   );
 }

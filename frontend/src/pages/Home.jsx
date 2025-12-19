@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../services/api";
-import AdminLinks from "../components/AdminLinks";
+// import AdminLinks from "../components/AdminLinks";
 
 
 function Home() {
@@ -87,10 +87,10 @@ function Home() {
           <button type="submit">Subscribe</button>
         </form>
       </section>
-      {/* TEMP ADMIN ACCESS — REMOVE BEFORE FINAL SUBMISSION */}
-        <div style={{ marginBottom: "40px" }}>
+      {/* ADMIN ACCESS  */}
+        {/* <div style={{ marginBottom: "40px" }}>
         <AdminLinks />
-        </div>
+        </div> */}
 
     </div>
   );
