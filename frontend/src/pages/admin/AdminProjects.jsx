@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 
 function AdminProjects() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-
+  const [image, setImage] = useState("");
   const [projects, setProjects] = useState([]);
   const [status, setStatus] = useState("");
 
@@ -22,21 +21,17 @@ function AdminProjects() {
     e.preventDefault();
     setStatus("Saving project...");
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("image", image);
-
     try {
-      await api.post("/projects", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+      await api.post("/projects", {
+        name,
+        description,
+        image
       });
 
       setStatus("Project added successfully");
       setName("");
       setDescription("");
-      setImage(null);
-
+      setImage("");
       fetchProjects();
     } catch (err) {
       setStatus("Failed to add project");
@@ -64,9 +59,10 @@ function AdminProjects() {
         />
 
         <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
+          type="text"
+          placeholder="Image URL (https://...)"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
           required
         />
 

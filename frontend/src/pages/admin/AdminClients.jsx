@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 
 function AdminClients() {
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-
+  const [image, setImage] = useState("");
   const [clients, setClients] = useState([]);
   const [status, setStatus] = useState("");
 
@@ -23,23 +22,19 @@ function AdminClients() {
     e.preventDefault();
     setStatus("Saving client...");
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("designation", designation);
-    formData.append("description", description);
-    formData.append("image", image);
-
     try {
-      await api.post("/clients", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+      await api.post("/clients", {
+        name,
+        designation,
+        description,
+        image
       });
 
       setStatus("Client added successfully");
       setName("");
       setDesignation("");
       setDescription("");
-      setImage(null);
-
+      setImage("");
       fetchClients();
     } catch (err) {
       setStatus("Failed to add client");
@@ -68,16 +63,17 @@ function AdminClients() {
         />
 
         <textarea
-          placeholder="Client feedback / description"
+          placeholder="Client feedback"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
 
         <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
+          type="text"
+          placeholder="Image URL (https://...)"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
           required
         />
 
