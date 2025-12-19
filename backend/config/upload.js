@@ -4,10 +4,12 @@ import cloudinary from "./cloudinary.js";
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "company-portfolio",
-    allowed_formats: ["jpg", "jpeg", "png"]
-  }
+  params: async (req, file) => {
+    return {
+      folder: "company-portfolio",
+      format: file.mimetype.split("/")[1], // jpg / png
+    };
+  },
 });
 
 const upload = multer({ storage });
