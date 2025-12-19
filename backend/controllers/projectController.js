@@ -1,23 +1,19 @@
 import Project from "../models/Project.js";
-import cloudinary from "../config/cloudinary.js";
 
 export const addProject = async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { name, description, image } = req.body;
 
-    if (!req.file) {
-      return res.status(400).json({ message: "Project image is required" });
+    if (!name || !description || !image) {
+      return res.status(400).json({
+        message: "Name, description and image URL are required"
+      });
     }
-
-    const result = await cloudinary.uploader.upload(
-      `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`,
-      { folder: "company-portfolio" }
-    );
 
     const project = new Project({
       name,
       description,
-      image: result.secure_url,
+      image
     });
 
     await project.save();
