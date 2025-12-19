@@ -651,3 +651,13 @@ body {
 .project-card {
   text-align: center;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: auto;
+}
