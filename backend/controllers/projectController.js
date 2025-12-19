@@ -27,3 +27,12 @@ export const addProject = async (req, res) => {
     res.status(500).json({ message: "Failed to add project" });
   }
 };
+
+export const getProjects = async (req, res) => {
+  try {
+    const projects = await Project.find().sort({ createdAt: -1 });
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch projects" });
+  }
+};
